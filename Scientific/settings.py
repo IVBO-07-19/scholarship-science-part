@@ -81,15 +81,15 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'Scientific',
+        'NAME': 'defaultdb',
 
-        'USER': 'postgres',
+        'USER': 'doadmin',
 
-        'PASSWORD': 'Zcneltyn123',
+        'PASSWORD': 'e7vmnioythuhey1g',
 
-        'HOST': 'localhost',
+        'HOST': 'science-do-user-9018272-0.b.db.ondigitalocean.com',
 
-        'PORT': '',
+        'PORT': '25060',
 
     }
 }

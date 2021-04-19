@@ -22,8 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('science/', views.get_data),
     
-    path('science/grants/', views.add_grants)
-    path('science/patents/', views.add_patents)
-    path('science/publications/', views.add_publications)
-    path('science/scientific_research_works/', views.add_scientific_research_works)
+    path('science/grants/', views.add_grants),
+    path('science/patents/', views.add_patents),
+    path('science/publications/', views.add_publications),
+    path('science/scientific_research_works/', views.add_scientific_research_works),
+    path('science/user/setAsRequest/', views.setAsRequest),
 ]
