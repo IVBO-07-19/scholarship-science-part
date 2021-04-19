@@ -106,10 +106,10 @@ def add_scientific_research_works(request):
         scientific_research_work.save()
         return JsonResponse({'Status': 'Confirmed'})
 
-def setAsRequest(user_id):
+def setAsRequest(user):
     confirmation_status = Confirmation_Status()
-    confirmation_status.user_id = user_id
-    confirmation_status.admin_id = "request"
+    confirmation_status.user = user
+    confirmation_status.admin = "request"
 
     confirmation_status.save()
     return True
