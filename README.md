@@ -6,4 +6,5 @@
 
 ### UML diagram for database
 
-![UML diagram](https://media.discordapp.net/attachments/812603982106460173/832263385830916126/ScieDB.jpg)
+![UML diagram](https://psv4.userapi.com/c536236/u369657593/docs/d12/92278daad3d6/Screenshot_20210419_171630.png?extra=2CihfDzTDVwOEKQxEunGGXw5_-bisY8HbeGxzTjm33K4pSrb35iqruAKFUKF8WSdulhrZob017IbwHDN2x4ewbH8QYx69z3Rfh9DiRk4oKEWLrCeytZEq4xyN1mlEvGXBalaOaoY16vRu0nHiOUtAQ)
+
