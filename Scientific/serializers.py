@@ -1,7 +1,32 @@
 from rest_framework import serializers
-from .models import MyProject
+from .models import *
 
-class MyProjectSerializer(serializers.ModelSerializer):
+
+class GrantSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MyProject
-        fields = "__all__"
+        model = Grant
+        fields = '__all__'
+
+
+class ResearchWorkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Scientific_Research_Work
+        fields = '__all__'
+
+
+class PatentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Patent
+        fields = '__all__'
+
+
+class PublicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Publications
+        fields = '__all__'
+
+
+class ConfirmationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Confirmation_Status
+        fields = '__all__'

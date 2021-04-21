@@ -7,47 +7,128 @@ import psycopg2
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from Scientific.models import MyProject
-from Scientific.serializers import MyProjectSerializer
-from Scientific.models import MyProject
+from .models import *
+from .serializers import *
+
+
+from Scientific.models import Scientific_Research_Work, Patent, Grant, Publications
 
 # Create your views here.
+
 @csrf_exempt
-def get_first(request):
-    if request.method == "GET":
-        message_list = []
-        for p in MyProject.objects.raw('SELECT id, place, status FROM simple_myproject'):
-            message_list.append({'id': p.id, 'place': p.place, 'status': p.status})
-        return JsonResponse(test_list, safe=False)
+@api_view(['GET', 'POST'])
+def get_data(request):
+    if request.method == 'GET':
 
-    elif request.method == "POST":
-        # data = {
-        # "id": 4,
-        # "status": json.loads(request.body)["field2"],
-        # "place": 5
-        # }
-        serializer = MyProjectSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
-        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        user_id = '1'
+
+        grantser = GrantSerializer(Grant.objects.filter(user=user_id).all(), many=True)
+        publicationser = PublicationSerializer(Publications.objects.filter(user=user_id).all(), many=True)
+        patentser = PatentSerializer(Patent.objects.filter(user=user_id).all(), many=True)
+        researchser = ResearchWorkSerializer(Scientific_Research_Work.objects.filter(user=user_id).all(), many=True)
+        
+        return JsonResponse({'Grants': grantser.data, 'Publications': publicationser.data, 'Patents': patentser.data, 'Research_works': researchser.data}, safe=False)
 
 
-def get_index(request, id):
-    # data = {
-    # "id": id,
-    # "status": "value 2",
-    # "place": 5
-    # }
-    projects = MyProject.objects.get(id)
-    serializer = MyProjectSerializer(projects, many=True)
-    return JsonResponse(serializer.data, safe=False)
+@api_view(['GET', 'POST'])
+def add_grants(request):
+    if request.method == 'POST':
+        try:
+            for i in request.data:
+                serializer = GrantSerializer(data= i)
+                if serializer.is_valid():
+                    serializer.save()
+                else:
+                    raise TypeError
+            return JsonResponse(request.data, status=status.HTTP_201_CREATED, safe=False)
+        except:
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        return JsonResponse({'Method': 'add_grants'})
+
+
+@api_view(['GET', 'POST'])
+def add_researchWorks(request):
+    if request.method == 'POST':
+        try:
+            for i in request.data:
+                serializer = ResearchWorkSerializer(data= i)
+                if serializer.is_valid():
+                    serializer.save()
+                else:
+                    raise TypeError
+            return JsonResponse(request.data, status=status.HTTP_201_CREATED, safe=False)
+        except:
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        return JsonResponse({'Method': 'add_researchWorks'})
+
+
+@api_view(['GET', 'POST'])
+def add_patents(request):
+    if request.method == 'POST':
+        try:
+            for i in request.data:
+                serializer = PatentSerializer(data= i)
+                if serializer.is_valid():
+                    serializer.save()
+                else:
+                    raise TypeError
+            return JsonResponse(request.data, status=status.HTTP_201_CREATED, safe=False)
+        except:
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        return JsonResponse({'Method': 'add_patents'})
+
+
+@api_view(['GET', 'POST'])
+def add_publications(request):
+    if request.method == 'POST':
+        try:
+            for i in request.data:
+                serializer = PublicationSerializer(data= i)
+                if serializer.is_valid():
+                    serializer.save()
+                else:
+                    raise TypeError
+            return JsonResponse(request.data, status=status.HTTP_201_CREATED, safe=False)
+        except:
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        return JsonResponse({'Method': 'add_publications'})
+
+
+'''
+Need to add unique_user_id and admin validation
+'''
+@api_view(['GET', 'POST'])
+def makeRequest(request):
+    if request.method == 'POST':
+        user_id = 1
+        try:
+            add_data = {
+                "user": user_id,
+                "admin": "Request"
+            }
+            serializer = ConfirmationSerializer(data= add_data)
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                raise TypeError
+            return JsonResponse({"Status": "Created"})
+        except:
+            return JsonResponse({"Status": "Error"})
+    elif request.method == "GET":
+        return JsonResponse({"Method": "makeRequest"})
 
 
 
-
-# @api_view(['GET', 'POST'])
-# def project_list(request):
-#     if request.method == 'GET':
-#         projects = MyProject.objects.all()
-#         se
+@api_view(['GET'])
+def showGrants(request):
+    '''
+    Example for serializer
+    '''
+    if request.method == 'GET':
+        show = Grant.objects.filter(user = 1).all()
+        serializer = GrantSerializer(show, many=True)
+        return JsonResponse(serializer.data, safe=False)

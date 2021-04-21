@@ -17,11 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from . import views
-from .router import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/science/example', views.get_first),
-    path('api/science/example/<str:id>/', views.get_index),
-    path('api/science/', include(router.urls))
+    path('science/', views.get_data),
+    path('science/grants/', views.add_grants),
+    path('science/researchWorks/', views.add_researchWorks),
+    path('science/patent/', views.add_patents),
+    path('science/publications/', views.add_publications),
+    path('science/conform/', views.makeRequest),
+    path('test/', views.showGrants),
 ]
