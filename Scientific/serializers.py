@@ -26,7 +26,8 @@ class PublicationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ConfirmationSerializer(serializers.ModelSerializer):
+class ScientificSerializer(serializers.ModelSerializer):
+
     class Meta:
-        model = Confirmation_Status
         fields = '__all__'
+        model = Scientific
